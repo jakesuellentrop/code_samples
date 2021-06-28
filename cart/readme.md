@@ -1,3 +1,5 @@
-## Cart Wrapper
+## Cart System
 
-A wrapper class I made to use with [darryldecode/laravelshoppingcart](https://github.com/darryldecode/laravelshoppingcart). It provides a syntax that I think is more readable and expressive.
+This is my implementation of a cart system for a project I'm currently working on. I am utilizing a 3rd party package for the cart logic, however the package methods didn't really fit my business logic how I liked (according to my interface at `Contracts\Cart\CartInterface.php`). To remedy this I wrote an adapter class, `Contracts\Cart\DdCartAdapter.php`, that implements my `CartInterface`. The adapter is still a work in progress, so not every method is fully built out. The adapter class uses dependency injection to resolve the current cart instance from the service container.
+
+This same project was started using Laravel Jetstream as a foundation. As I built out the cart system, I wanted to continue to use the Jetstream design pattern of using "Action" classes that are resolved out of the service container. To do this, I built out the classes under `Actions\Cart` that provide different cart function implementations. In my service provider, each of these is mapped to an interface so that if need be, the implementations can be substituted.
